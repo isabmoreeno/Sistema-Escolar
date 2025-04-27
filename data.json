@@ -1,0 +1,19 @@
+{
+  "students": [
+    {
+      "id": 2,
+      "name": "Fernanda Silva",
+      "course": "Computação"
+    },
+    {
+      "id": 3,
+      "name": "Mario Antunes",
+      "course": "Matemática"
+    },
+    {
+      "id": 4,
+      "name": "asdas",
+      "course": "12321321"
+    }
+  ]
+}
