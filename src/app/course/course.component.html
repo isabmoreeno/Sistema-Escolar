@@ -1,0 +1,117 @@
+<div class="container p-4">
+  <div class="row">
+    <div class="col-7 m-auto">
+      <h1 class="text-center">Cadastro de Cursos</h1>
+      <form [formGroup]="formGroupCourse">
+        <div class="mb-3">
+          <label for="inputCourse" class="form-label">Nome do Curso</label>
+          <div id="courseHelp" class="form-text">Digite o nome completo do curso</div>
+          <input formControlName="course" type="text" class="form-control" id="inputCourse" aria-describedby="courseHelp" />
+        </div>
+
+        <div class="mb-3">
+          <label for="inputAbbreviation" class="form-label">Sigla do Curso</label>
+          <div id="abbreviationHelp" class="form-text">Digite a sigla do curso</div>
+          <input formControlName="abbreviation" type="text" class="form-control" id="inputAbbreviation" aria-describedby="abbreviationHelp" />
+        </div>
+
+        <div class="mb-3">
+          <label for="inputAxis" class="form-label">Eixo:</label>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="axis" name="axis" id="axis1" value="Ambiente e Saúde">
+                <label class="form-check-label" for="axis1">Ambiente e Saúde</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="axis" name="axis" id="axis2" value="Gestão de Negócios">
+                <label class="form-check-label" for="axis2">Gestão de Negócios</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="axis" name="axis" id="axis3" value="Comunicação">
+                <label class="form-check-label" for="axis3">Comunicação</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="axis" name="axis" id="axis4" value="Design">
+                <label class="form-check-label" for="axis4">Design</label>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="axis" name="axis" id="axis5" value="Logística">
+                <label class="form-check-label" for="axis5">Logística</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="axis" name="axis" id="axis6" value="Mecatrônica">
+                <label class="form-check-label" for="axis6">Mecatrônica</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="axis" name="axis" id="axis7" value="Produção Industrial">
+                <label class="form-check-label" for="axis7">Produção Industrial</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="axis" name="axis" id="axis8" value="Tecnologia">
+                <label class="form-check-label" for="axis8">Tecnologia</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="inputSchedule" class="form-label">Período:</label>
+          <div class="row">
+            <div class="col-4">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="schedule" name="schedule" id="schedule1" value="Matutino">
+                <label class="form-check-label" for="schedule1">Matutino</label>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="schedule" name="schedule" id="schedule2" value="Vespertino">
+                <label class="form-check-label" for="schedule2">Vespertino</label>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" formControlName="schedule" name="schedule" id="schedule3" value="Noturno">
+                <label class="form-check-label" for="schedule3">Noturno</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" (click)="saveCourse()">Salvar</button>
+      </form>
+
+      <br><br>
+
+      <h2 class="text-center">Cursos Cadastrados</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nome Completo</th>
+            <th scope="col">Sigla</th>
+            <th scope="col">Eixo</th>
+            <th scope="col">Período</th>
+            <th scope="col">Funções</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of courses">
+            <th scope="row">{{ c.id }}</th>
+            <td>{{ c.course }}</td>
+            <td>{{ c.abbreviation }}</td>
+            <td>{{ c.axis }}</td>
+            <td>{{ c.schedule }}</td>
+            <td>
+              <button class="btn btn-danger me-2" (click)="deleteCourse(c)">Remover</button>
+              <button class="btn btn-warning" (click)="editCourse(c)">Editar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
