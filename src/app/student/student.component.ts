@@ -7,81 +7,76 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   selector: 'app-student',
   standalone: false,
   templateUrl: './student.component.html',
-  styleUrl: './student.component.css',
+  styleUrl: './student.component.css'
 })
 export class StudentComponent implements OnInit {
-  students: Student[] = [];
-  courses: any[] = [];
-  formGroupStudent: FormGroup;
-  isEditMode: boolean = false;
-  currentStudentId: number | null = null;
 
-  constructor(
-    private service: StudentService,
+  students: Student[] = [];
+  formGroupStudent: FormGroup;
+  isEditing: boolean = false;
+
+  constructor(private service: StudentService,
     private formBuilder: FormBuilder
   ) {
-    this.formGroupStudent = formBuilder.group({
-      id: [''],
-      name: [''],
-      course: [''],
-    });
+    this.formGroupStudent = formBuilder.group(
+      {
+        id: [''],
+        name: [''],
+        course: ['']
+      }
+    );
+
+
   }
 
   ngOnInit(): void {
     this.loadStudents();
-    this.loadCourses();
   }
 
   loadStudents() {
     this.service.getAll().subscribe({
-      next: (json) => (this.students = json),
+      next: json => this.students = json
     });
   }
 
-  loadCourses() {
-    this.service.getSelect().subscribe({
-      next: (json) => (this.courses = json),
-    });
-  }
-
-  save() {
+  onClickSave() {
     this.service.save(this.formGroupStudent.value).subscribe({
-      next: (json) => {
-        this.students.push(json);
-        this.formGroupStudent.reset();
-      },
+          next: json => {
+            this.students.push(json);
+            this.formGroupStudent.reset();
+          }
     });
   }
 
-  delete(student: Student) {
+  onClickDelete(student: Student) {
     this.service.delete(student).subscribe({
-      next: () => this.loadStudents(),
+        next: () => this.loadStudents()
     });
   }
 
-  edit(student: Student) {
-    this.isEditMode = true;
-    this.currentStudentId = student.id;
-    this.formGroupStudent.setValue({
-      id: student.id,
-      name: student.name,
-      course: student.course,
-    });
+  onClickUpdate(student: Student) {
+    this.formGroupStudent.setValue(student);
+    this.isEditing=true;
   }
 
-  closeEditMode() {
-    this.isEditMode = false;
+  onClickConfirmUpdate() {
+    this.service.update(this.formGroupStudent.value)
+      .subscribe({
+          next: () => {
+              this.loadStudents(); 
+              this.clear();
+          }
+      });
+  }
+
+  onClickClear() {
+    this.clear();
+  }
+
+  clear(){
     this.formGroupStudent.reset();
-  }
-
-  update() {
-    const updatedStudent = this.formGroupStudent.value;
-    this.service.update(updatedStudent).subscribe({
-      next: () => {
-        this.loadStudents();
-        this.closeEditMode();
-      },
-    });
+    this.isEditing=false;   
   }
 
 }
+ 
