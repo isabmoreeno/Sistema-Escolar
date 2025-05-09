@@ -15,5 +15,28 @@
       "name": "asdas",
       "course": "12321321"
     }
+  ],
+  "courses": [
+    {
+      "id": 2,
+      "course": "Engenharia de Software",
+      "abbreviation": "ES",
+      "axis": "Tecnologia",
+      "schedule": "Matutino"
+    },
+    {
+      "id": 3,
+      "course": "Administração",
+      "abbreviation": "ADM",
+      "axis": "Gestão e Negócios",
+      "schedule": "Vespertino"
+    },
+    {
+      "id": 4,
+      "course": "Gestão da Tecnologia da Informação",
+      "abbreviation": "GTI",
+      "axis": "Tecnologia",
+      "schedule": "Noturno"
+    }
   ]
 }

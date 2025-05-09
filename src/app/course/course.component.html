@@ -106,8 +106,15 @@
             <td>{{ c.axis }}</td>
             <td>{{ c.schedule }}</td>
             <td>
-              <button class="btn btn-danger me-2" (click)="deleteCourse(c)">Remover</button>
-              <button class="btn btn-warning" (click)="editCourse(c)">Editar</button>
+
+              <button class="btn btn-editar" (click)="editCourse(c)">
+  Editar
+</button>
+
+<button class="btn btn-remover" (click)="deleteCourse(c)">
+  Remover
+</button>
+
             </td>
           </tr>
         </tbody>
